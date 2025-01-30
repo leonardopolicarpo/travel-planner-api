@@ -1,7 +1,7 @@
-import { Trip } from '../models/trip';
+import { TripModel } from '../models/trip';
 
 export interface InterfaceTripRepository {
-  createTrip(trip: Trip): Promise<Trip>;
-  getAllTrips(): Promise<Trip[]>;
-  getTripById(id: string): Promise<Trip | null>
+  createTrip(trip: TripModel): Promise<TripModel>;
+  // getAllTrips(): Promise<Trip[]>;
+  // getTripById(id: string): Promise<Trip | null>
 }
