@@ -26,12 +26,11 @@ Um serviço de planejamento de viagens que permite criar roteiros personalizados
 ## Estrutura do Projeto
 
 src/
-├── application/      # Casos de uso e serviços
-├── config/           # Configurações
-├── domain/           # Entidades e interfaces
+├── data/             # Casos de uso e serviços
+├── domain/           # Entidades, interfaces
 ├── infra/            # Comunicação com o banco e serviços externos
-├── presentation/     # Controladores
-├── routes/           # Rotas
+├── main/             # Rotas, adaptadores, configurações e construtores
+├── presentation/     # Controladores, middlewares
 └── utils/            # Utilitários
 
 ## Como Rodar o Projeto
@@ -91,8 +90,8 @@ npm run dev
 ## Documentação
 Para mais detalhes sobre o uso da API, roadmap do projeto e decisões técnicas, acesse a documentação completa no diretório docs/:
 
-[Documentação da API](https://docs.google.com/document/)
-[Roadmap do Projeto](https://docs.google.com/document/)
+[Documentação da API](https://github.com/leonardopolicarpo/travel-planner-api/blob/main/docs/api.md)
+[Roadmap do Projeto](https://github.com/leonardopolicarpo/travel-planner-api/blob/main/docs/roadmap.md)
 
 
 ### Funcionalidades planejadas
