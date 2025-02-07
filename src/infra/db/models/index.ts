@@ -1,15 +1,22 @@
 import { Sequelize } from 'sequelize';
 import { initTripModel, TripEntity } from './trip';
+import { initUsersModel, UsersEntity } from './users';
 
-// Função para conectar ao banco e inicializar os modelos
 export const initDatabase = async (sequelize: Sequelize) => {
-  initTripModel(sequelize); // Inicializa o modelo TripEntity
+  try {
+    await sequelize.authenticate();
+    console.log('✅ Conexão com o banco de dados estabelecida.');
 
-  // Sincroniza os modelos com o banco
-  await sequelize.sync({ alter: true });
+    initUsersModel(sequelize);
+    initTripModel(sequelize);
 
-  console.log('Database & tables synchronized!');
+    await sequelize.sync({ alter: process.env.NODE_ENV !== 'production' });
+
+    console.log('✅ Database & tabelas sincronizadas!');
+  } catch (error) {
+    console.error('❌ Erro ao conectar ao banco de dados:', error);
+    process.exit(1);
+  }
 };
 
-// Exportamos o modelo para ser usado em repositórios
-export { TripEntity };
+export { TripEntity, UsersEntity };

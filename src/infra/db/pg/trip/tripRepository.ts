@@ -1,4 +1,4 @@
-import { InterfaceTripRepository } from '../../../../domain/repositories/ITripREpository';
+import { InterfaceTripRepository } from '../../../../domain/repositories/ITripRepository';
 import { CreateTripModel, TripModel } from '../../../../domain/models/trip';
 import { TripEntity } from '../../models';
 

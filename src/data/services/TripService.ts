@@ -1,6 +1,6 @@
 import { CreateTrip } from '../usecases/createTrip/createTrip';
 import { Trip } from '../../domain/models/trip';
-import { InterfaceTripRepository } from '../../domain/repositories/ITripREpository';
+import { InterfaceTripRepository } from '../../domain/repositories/ITripRepository';
 
 export class TripService {
   private createTripUsecase: CreateTrip;
