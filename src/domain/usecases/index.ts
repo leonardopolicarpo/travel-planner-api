@@ -1,4 +1,4 @@
 export * from './createTrip';
-export * from './addUser';
+export * from './createUser';
 export * from './getUserByEmail';
 export * from './authentication';

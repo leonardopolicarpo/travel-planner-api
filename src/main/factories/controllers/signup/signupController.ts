@@ -1,8 +1,8 @@
-import { Controller } from '../../../../presentation/protocols';
-import { AddUserController } from '../../../../presentation/controllers';
+import type { Controller } from '../../../../presentation/protocols';
+import { SignUpController } from '../../../../presentation/controllers';
 import { makeSignUpValidation } from './signupValidation';
-import { makeAddUser } from '../../usecases';
+import { makeCreateUser } from '../../usecases';
 
 export const makeSignUpController = (): Controller => {
-  return new AddUserController(makeSignUpValidation(), makeAddUser());
+  return new SignUpController(makeSignUpValidation(), makeCreateUser());
 }

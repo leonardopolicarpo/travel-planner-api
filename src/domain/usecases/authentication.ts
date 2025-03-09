@@ -1,10 +1,8 @@
-import { UserModel } from '../models';
-
 export interface AuthenticationModel {
-  user: Partial<UserModel>,
+  email: string,
   password: string
 }
 
 export interface Authentication {
-  auth(authentication: AuthenticationModel): Promise<void>
+  auth(authentication: AuthenticationModel): Promise<string>
 }

@@ -1,4 +1,4 @@
-import { TripModel } from '../models/trip';
+import type { TripModel } from '../models/trip';
 
 export interface InterfaceTripRepository {
   createTrip(trip: TripModel): Promise<TripModel>;

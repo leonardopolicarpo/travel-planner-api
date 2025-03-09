@@ -1,5 +1,5 @@
-import { InterfaceUsersRepository } from '../../../domain/repositories/IUsersRepository';
-import { UserModel } from '../../../domain/models';
+import type { InterfaceUsersRepository } from '../../../domain/repositories/IUsersRepository';
+import type { UserModel } from '../../../domain/models';
 
 export class LoadUserByEmailDb {
   private userRepository: InterfaceUsersRepository;

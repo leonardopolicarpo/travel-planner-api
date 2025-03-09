@@ -1,20 +1,44 @@
-import { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols';
-import { Request, Response } from 'express';
+import type { Controller, HttpRequest, HttpResponse } from '../../presentation/protocols';
+import type { Request, Response } from 'express';
 
 export const adaptRoute = (controller: Controller) => {
-  return async (req: Request, res: Response) => {
+  return async (request: Request, response: Response) => {
     const httpRequest: HttpRequest = {
-      body: req.body,
-      query: req.query,
-      params: req.params
+      body: request.body,
+      query: request.query,
+      params: request.params,
+      headers: request.headers
     };
+
     const httpResponse: HttpResponse = await controller.handle(httpRequest);
-    if(httpResponse.statusCode >= 200 && httpResponse.statusCode <= 299) {
-      res.status(httpResponse.statusCode).json(httpResponse.body)
-    } else {
-      res.status(httpResponse.statusCode).json({
-        error: httpResponse.body.message
-      });
+
+    console.log('uai', httpResponse)
+
+    if (httpResponse.cookies) {
+      for (const [key, value] of Object.entries(httpResponse.cookies)) {
+        response.cookie(key, value, {
+          httpOnly: true,
+          secure: process.env.NODE_ENV === 'production',
+          sameSite: 'strict',
+          maxAge: 15 * 60 * 1000
+        })
+      }
     };
+
+    if (httpResponse.headers) {
+      for (const [key, value] of Object.entries(httpResponse.headers)) {
+        response.setHeader(key, value as string)
+      }
+    }
+
+    const { statusCode, body } = httpResponse;
+
+    const responseHandler = response.status(statusCode);
+
+    statusCode >= 200 && statusCode <= 299
+      ? responseHandler.json(body)
+      : responseHandler.json({
+        error: body.message
+      })
   };
 };

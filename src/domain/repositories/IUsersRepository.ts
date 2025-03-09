@@ -1,7 +1,7 @@
-import { CreateUserModel, UserModel } from '../models/users';
+import type { CreateUserModel, UserModel } from '../models/users';
 
 export interface InterfaceUsersRepository {
-  createUser(trip: CreateUserModel): Promise<UserModel>;
+  createUser(userData: CreateUserModel): Promise<void>;
   getUserByEmail(email: string): Promise<UserModel | null>;
   // getUserById(): Promise<UserModel>;
   // editUser(userData: Partial<UserModel>): Promise<UserModel>

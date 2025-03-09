@@ -1,27 +1,31 @@
-import { Controller, HttpRequest, HttpResponse, Validation } from '../../protocols';
+import type { Controller, HttpRequest, HttpResponse, Validation } from '../../protocols';
 import { badRequest, created, serverError } from '../../helpers';
-import { AddUser } from '../../../domain/usecases';
-import { UserModel } from '../../../domain/models';
+import type { CreateUser } from '../../../domain/usecases';
 
 export class SignUpController implements Controller {
   private userValidation: Validation;
-  private addUser: AddUser;
+  private createUser: CreateUser;
 
   constructor(
     userValidation: Validation,
-    addUser: AddUser
+    createUser: CreateUser
   ) {
     this.userValidation = userValidation
-    this.addUser = addUser;
+    this.createUser = createUser;
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
+    console.log('oxeee')
     try {
       const error = this.userValidation.validate(httpRequest.body);
-      if(error) return badRequest(error);
+      if (error) return badRequest(error);
       
-      const user = await this.addUser.create(httpRequest.body);
-      return created<UserModel>(user);
+      await this.createUser.create(httpRequest.body);
+      return created({
+        body: { message: 'User created successfully' },
+        headers: { Location: '/auth/login' }
+      });
+
     } catch (error) {
       return serverError(error as Error);
     }

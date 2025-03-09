@@ -1,8 +1,13 @@
-import { Controller } from '../../../../presentation/protocols';
-import { AddUserController } from '../../../../presentation/controllers';
+import type { Controller } from '../../../../presentation/protocols';
+import { LoginController } from '../../../../presentation/controllers';
 import { makeLoginValidation } from './loginValidation';
-import { makeAddUser } from '../../usecases';
+import { makeAuthentication } from '../../usecases';
+import { TokenService } from '../../../../domain/services/tokenService';
 
 export const makeLoginController = (): Controller => {
-  return new AddUserController(makeLoginValidation(), makeAddUser());
+  return new LoginController(
+    makeLoginValidation(),
+    makeAuthentication(),
+    new TokenService()
+  );
 }

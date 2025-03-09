@@ -1,12 +1,11 @@
-import { InterfaceUsersRepository } from '../../../../domain/repositories/IUsersRepository';
-import { CreateUserModel, UserModel } from '../../../../domain/models';
+import type { InterfaceUsersRepository } from '../../../../domain/repositories/IUsersRepository';
+import type { CreateUserModel, UserModel } from '../../../../domain/models';
 import { UsersEntity } from '../../models';
 
 export class UserRepository implements InterfaceUsersRepository {
 
-  async createUser(userData: CreateUserModel): Promise<UserModel> {
-    const user = await UsersEntity.create(userData);
-    return user;
+  async createUser(userData: CreateUserModel): Promise<void> {
+    await UsersEntity.create(userData);
   }
 
   async getUserByEmail(email: string): Promise<UserModel | null> {
