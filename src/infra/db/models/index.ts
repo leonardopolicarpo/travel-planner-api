@@ -1,20 +1,20 @@
-import { Sequelize } from 'sequelize';
-import { initTripModel, TripEntity } from './trip';
+import type { Sequelize } from 'sequelize';
+import { TripEntity } from './trip';
 import { initUsersModel, UsersEntity } from './users';
 
 export const initDatabase = async (sequelize: Sequelize) => {
   try {
     await sequelize.authenticate();
-    console.log('✅ Conexão com o banco de dados estabelecida.');
+    console.log('✅ Database connection established');
 
     initUsersModel(sequelize);
-    initTripModel(sequelize);
+    // initTripModel(sequelize);
 
     await sequelize.sync({ alter: process.env.NODE_ENV !== 'production' });
 
-    console.log('✅ Database & tabelas sincronizadas!');
+    console.log('✅ Database and tables synchronized!');
   } catch (error) {
-    console.error('❌ Erro ao conectar ao banco de dados:', error);
+    console.error('❌ Error connecting to database:', error);
     process.exit(1);
   }
 };

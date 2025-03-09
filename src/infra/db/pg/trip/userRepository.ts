@@ -1,21 +1,20 @@
-import { InterfaceUsersRepository } from '../../../../domain/repositories/IUsersRepository';
-import { CreateUserModel, UserModel } from '../../../../domain/models';
+import type { InterfaceUsersRepository } from '../../../../domain/repositories/IUsersRepository';
+import type { CreateUserModel, UserModel } from '../../../../domain/models';
 import { UsersEntity } from '../../models';
 
 export class UserRepository implements InterfaceUsersRepository {
 
-  async createUser(userData: CreateUserModel): Promise<UserModel> {
-    const user = await UsersEntity.create(userData);
-    return user;
+  async createUser(userData: CreateUserModel): Promise<void> {
+    await UsersEntity.create(userData);
   }
 
-  // async getAllTrips(): Promise<Trip[]> {
-  //   const trips = await UserModel.findAll();
-  //   return trips.map((trip) => trip.toJSON() as Trip);
-  // }
-
-  // async getTripById(id: string): Promise<Trip | null> {
-  //   const trip = await UserModel.findByPk(id);
-  //   return trip ? (trip.toJSON() as Trip) : null;
-  // }
+  async getUserByEmail(email: string): Promise<UserModel | null> {
+    try {
+      const user = await UsersEntity.findOne({ where: { email } });
+      return user;
+    } catch (error) {
+      console.error("Error load user:", error);
+      return null;
+    }
+  }
 }
