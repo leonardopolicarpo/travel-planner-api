@@ -12,8 +12,6 @@ export const adaptRoute = (controller: Controller) => {
 
     const httpResponse: HttpResponse = await controller.handle(httpRequest);
 
-    console.log('uai', httpResponse)
-
     if (httpResponse.cookies) {
       for (const [key, value] of Object.entries(httpResponse.cookies)) {
         response.cookie(key, value, {

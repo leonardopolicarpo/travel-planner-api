@@ -15,7 +15,6 @@ export class SignUpController implements Controller {
   }
 
   async handle(httpRequest: HttpRequest): Promise<HttpResponse> {
-    console.log('oxeee')
     try {
       const error = this.userValidation.validate(httpRequest.body);
       if (error) return badRequest(error);

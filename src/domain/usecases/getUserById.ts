@@ -1,5 +1,3 @@
-import { UserModel } from '../models';
-
 export interface LoadUserById {
-  load(id: string): Promise<UserModel>
-}
+  load(id: string): Promise<string | null>;
+};

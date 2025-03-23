@@ -55,6 +55,7 @@ export class TokenService {
     return randomBytes(32).toString('hex');
   }
 
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   async verifyToken(token: string): Promise<any> {
     const secret = this.getJwtSecret();
     return jwt.verify(token, secret);

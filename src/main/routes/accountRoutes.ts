@@ -6,7 +6,8 @@ import {
 
 import {
   makeSignUpController,
-  makeLoginController
+  makeLoginController,
+  makeRefreshTokenController
 } from '../factories/controllers';
 
 import { makeAuthMiddleWare } from '../factories/middlewares';
@@ -16,6 +17,7 @@ export default (router: Router) => {
 
   router.post('/auth/signup', adaptRoute(makeSignUpController()));
   router.post('/auth/login', adaptRoute(makeLoginController()));
+  router.post('auth/refresh-token', adaptRoute(makeRefreshTokenController()))
   // router.post('auth/logout', adaptRoute(makeLogoutController()));
   // router.post('auth/activate/:token', adaptRoute(makeActivateAccountController()));
   // router.post('auth/forgot-password', adaptRoute(makeForgotPasswordController()));

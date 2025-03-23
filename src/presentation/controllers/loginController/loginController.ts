@@ -36,7 +36,10 @@ export class LoginController implements Controller {
       const refreshToken =
         await this.tokenService.generateRefreshsToken(userId);
 
-      return ok({ accessToken, refreshToken });
+      return ok({
+        body: { message: 'Login successfully' },
+        cookies: { accessToken, refreshToken }
+      });
       
     } catch (error) {
       return serverError(error as Error);

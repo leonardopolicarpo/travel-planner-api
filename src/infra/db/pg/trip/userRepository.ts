@@ -8,12 +8,12 @@ export class UserRepository implements InterfaceUsersRepository {
     await UsersEntity.create(userData);
   }
 
-  async getUserByEmail(email: string): Promise<UserModel | null> {
+  async getUserById(userId: string): Promise<UserModel | null> {
     try {
-      const user = await UsersEntity.findOne({ where: { email } });
+      const user = await UsersEntity.findOne({ where: { id: userId } });
       return user;
     } catch (error) {
-      console.error("Error load user:", error);
+      console.error('Error load user:', error);
       return null;
     }
   }
