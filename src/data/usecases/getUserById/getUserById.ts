@@ -1,15 +1,14 @@
 import type { InterfaceUsersRepository } from '../../../domain/repositories/IUsersRepository';
-import type { UserModel } from '../../../domain/models';
 
-export class LoadUserByEmailDb {
+export class LoadUserByIdDb {
   private userRepository: InterfaceUsersRepository;
 
   constructor(userRepository: InterfaceUsersRepository) {
     this.userRepository = userRepository
   }
 
-  async load(email: string): Promise<UserModel | null> {
-    const user = await this.userRepository.getUserByEmail(email)
-    return user;
+  async loadById(userId: string): Promise<string | undefined> {
+    const user = await this.userRepository.getUserById(userId)
+    return user?.id;
   }
 }

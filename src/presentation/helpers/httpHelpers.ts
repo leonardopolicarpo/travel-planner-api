@@ -1,17 +1,20 @@
 import { UnauthorizedError } from '../errors';
 import type { HttpResponse } from '../protocols';
 
-export const ok = <T>(data: T): HttpResponse<T> => ({
-  statusCode: 200,
-  body: data
-})
-
-interface CreatedInterface {
+interface DataInterface {
+  // biome-ignore lint/suspicious/noExplicitAny: <explanation>
   body: any
   headers?: Record<string, string>
+  cookies?: Record<string, string>
 }
 
-export const created = (data: CreatedInterface): HttpResponse => ({
+export const ok = <T>(data: DataInterface): HttpResponse<T> => ({
+  statusCode: 200,
+  body: data.body,
+  cookies: data.cookies
+})
+
+export const created = (data: DataInterface): HttpResponse => ({
   statusCode: 201,
   body: data.body,
   headers: data.headers

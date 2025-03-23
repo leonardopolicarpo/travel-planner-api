@@ -4,6 +4,9 @@ import setupRoutes from './routes';
 import { Sequelize } from 'sequelize';
 import { initDatabase } from '../../infra/db/models';
 
+import dotenv from 'dotenv';
+dotenv.config();
+
 const sequelize = new Sequelize({
   dialect: 'postgres',
   host: process.env.DB_HOST || 'localhost',
